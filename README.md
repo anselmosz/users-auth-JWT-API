@@ -55,18 +55,6 @@ Atualmente o sistema possui os seguintes recursos implementados:
 
 ---
 
-# 🔧 Funcionalidades planejadas
-
-### Frontend
-
-* Login
-* Lista de usuários
-* Edição de usuários
-* Comentários de clientes
-* Métricas básicas de satisfação
-
----
-
 # 🏛️ Arquitetura do projeto
 
 O projeto segue uma arquitetura em camadas:
