@@ -72,7 +72,7 @@ export default {
       if (tentativas >= 3) {
         const lockDate = new Date(); 
         
-        lockDate.setMinutes(lockDate.getMinutes() + 2);
+        lockDate.setMinutes(lockDate.getMinutes() + 5);
         
         await usersRepository.bloquearAcessoPorUmTempo(usuario.user_id, usuario.account_id, lockDate);
         throw new AppError("Usuário bloqueado por múltiplas tentativas inválidas.", 403);
