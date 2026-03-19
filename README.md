@@ -47,12 +47,12 @@ Criado como base reutilizável para futuros projetos que necessitem de autentica
 
 A API está disponível em produção:
 
-🔗 https://users-auth-jwt-api.onrender.com
+🔗 API: https://users-auth-jwt-api.onrender.com
 
 <!-- 
     ### Documentação (Swagger)
 
-    🔗 [Link da docuemntação]()
+    🔗 Docs (Swagger): [Link da docuemntação]()
  -->
 
 ---
@@ -287,20 +287,21 @@ Authorization: Bearer TOKEN
 
 ## ▶️ Como executar o projeto
 
-#### 1️⃣ Clonar o repositório
+#### 1 Clonar o repositório e acessar o local
 
 ```
 git clone https://github.com/anselmosz/users-auth-JWT-API
+
+cd <path to>/users-auth-JWT-API
 ```
 
-
-#### 2️⃣ Instalar dependências
+#### 2 Instalar dependências
 
 ```
 npm install
 ```
 
-#### 3️⃣ Criar o banco de dados
+#### 3 Criar o banco de dados
 
 Para este projeto, em testes locais usei o xampp como SGBD, utilizando o script `db_local.sql`
 
@@ -311,7 +312,7 @@ source <path_to>/db_local.sql
 ```
 
 
-#### 4️⃣ Configurar variáveis de ambiente
+#### 4 Configurar variáveis de ambiente
 
 Crie um arquivo `.env` baseado no `.env.example` configurando as variáveis do seu banco rodando localmente
 
@@ -328,12 +329,38 @@ DB_USER=db_user
 DB_PASSWORD=db_password
 
 JWT_SECRET=seu_secret
-JWT_EXPIRES_IN=tempo_de_expiracao_do_jwt
+JWT_EXPIRES_IN=1h
 ```
+#### Descrição das variáveis
+
+| Variável         | Descrição                                |
+| ---------------- | ---------------------------------------- |
+| NODE_ENV         | Tipo de ambiente que estará sendo rodado |
+| PORT             | Porta onde a aplicação estará rodando    |
+| DB_CLIENT        | Cliente do banco                         |
+| DATABASE_URL     | URL onde o banco está rodando            |
+| DB_PORT          | Porta onde o banco de dados está rodando |
+| DB_NAME          | Nome do banco de dados                   |
+| DB_USER          | Usuário do banco de dados                |
+| DB_PASSWORD      | Senha do usuário do banco                |
+| JWT_SECRET       | Chave secreta do token JWT               |
+| JWT_EXPIRES_IN   | Tempo de expiração do token              |
 
 
-#### 5️⃣ Executar o projeto
+#### 5 Executar o projeto
 
 ```
 npm run dev
 ```
+<!-- 
+---
+
+## Implementações futuras
+
+O projeto ainda está em desenvolvimento, e atualmente, as funcionalidades que estão mapeadas para ser implementadas são:
+- [ ] Implementar documentação gráfica com Swagger
+- [ ] Adicionar refresh token
+- [ ] Dockerizar aplicação
+- [ ] Migrar para PostgreSQL (Para deploy de backend e banco puramente no Render)
+
+-->
