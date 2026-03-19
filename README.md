@@ -20,7 +20,7 @@
 - [🚀 Funcionalidades](#-funcionalidades-atuais)
 - [🏛️ Arquitetura](#️-arquitetura-do-projeto)
 - [🧱 Estrutura](#-estrutura-de-módulos)
-- [⚙️ Tecnologias](#-tecnologias-utilizadas)
+- [⚙️ Tecnologias](#️-tecnologias-utilizadas)
 - [🔌 Endpoints](#-endpoints-da-api)
 - [▶️ Como executar](#️-como-executar-o-projeto)
 
