@@ -43,7 +43,7 @@ Criado como base reutilizável para futuros projetos que necessitem de autentica
 
 ---
 
-## 🌐 Deplpoy
+## 🌐 Deploy
 
 A API está disponível em produção:
 
