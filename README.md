@@ -28,16 +28,18 @@
 
 ## 📌 Sobre o projeto
 
-Este projeto foi desenvolvido como parte dos meus estudos em backend, com foco em construção de APIs seguras, escaláveis e organizadas seguindo boas práticas de arquitetura.
+API de autenticação e gerenciamento de usuários baseada em JWT, desenvolvida com foco em boas práticas de backend, arquitetura em camadas e isolamento de dados por conta.
 
-Ele também serve como base reutilizável para futuros projetos que necessitem de autenticação e autorização.
+O projeto simula um cenário real de sistema multi-tenant, permitindo que empresas criem contas e gerenciem seus usuários com controle de permissões (admin/member).
 
-Este projeto está sendo desenvolvido com foco em:
+Além da implementação das regras de negócio, o projeto também explora:
+- organização modular da aplicação
+- autenticação stateless com JWT
+- segurança com hash de senhas (bcrypt)
+- fluxo de desenvolvimento baseado em Git Flow (branch development e main)
+- deploy em ambiente de produção (Render + banco em cloud)
 
-* arquitetura modular
-* boas práticas de backend
-* autenticação com JWT
-* organização em camadas (Repository / Service / Controller) para separação de responsabilidades
+Criado como base reutilizável para futuros projetos que necessitem de autenticação e autorização.
 
 ---
 
