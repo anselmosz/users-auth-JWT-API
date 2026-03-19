@@ -1,32 +1,76 @@
-# 📌 User authentication API
+# User Authentication API
 
-Backend para estudar sobre processo de autenticação e autorização através de JSON Web Token.
+![GitHub last commit](https://img.shields.io/github/last-commit/anselmosz/users-auth-JWT-API)
+![GitHub repo size](https://img.shields.io/github/repo-size/anselmosz/users-auth-JWT-API)
+![GitHub issues](https://img.shields.io/github/issues/anselmosz/users-auth-JWT-API)
+![GitHub stars](https://img.shields.io/github/stars/anselmosz/users-auth-JWT-API)
 
-O sistema permite a criação de contas isoladas, e usuários com autenticação JWT e criptografia de senhas.
+![Node.js](https://img.shields.io/badge/node-%3E%3D18-green)
+![Express](https://img.shields.io/badge/express-4.x-blue)
+![MySQL](https://img.shields.io/badge/mysql-8.x-orange)
+![JWT](https://img.shields.io/badge/auth-JWT-black)
+
+---
+
+## 📚 Table of Contents
+
+- [📌 Sobre o projeto](#-sobre-o-projeto)
+- [🌐 Deploy](#-deplpoy)
+- [🎯 Objetivo](#-objetivo-do-sistema)
+- [🚀 Funcionalidades](#-funcionalidades-atuais)
+- [🏛️ Arquitetura](#️-arquitetura-do-projeto)
+- [🧱 Estrutura](#-estrutura-de-módulos)
+- [⚙️ Tecnologias](#-tecnologias-utilizadas)
+- [🔌 Endpoints](#-endpoints-da-api)
+- [▶️ Como executar](#️-como-executar-o-projeto)
+
+---
+
+## 📌 Sobre o projeto
+
+Este projeto foi desenvolvido como parte dos meus estudos em backend, com foco em construção de APIs seguras, escaláveis e organizadas seguindo boas práticas de arquitetura.
+
+Ele também serve como base reutilizável para futuros projetos que necessitem de autenticação e autorização.
 
 Este projeto está sendo desenvolvido com foco em:
 
 * arquitetura modular
 * boas práticas de backend
 * autenticação com JWT
-* organização em camadas (Repository / Service / Controller)
-
-Além de servir como **base para outros repositórios que tenham autenticação**, o projeto também funciona como **projeto de estudo e portfólio backend**.
+* organização em camadas (Repository / Service / Controller) para separação de responsabilidades
 
 ---
 
-# 🎯 Objetivo do Sistema
+## 🌐 Deplpoy
+
+A API está disponível em produção:
+
+🔗 https://users-auth-jwt-api.onrender.com
+
+<!-- 
+    ### Documentação (Swagger)
+
+    🔗 [Link da docuemntação]()
+ -->
+
+---
+
+## 🎯 Objetivo do Sistema
 
 Permitir que empresas:
 
 * Criem contas
-* Criem e gerenciem usuários
-* Usuários façam login
-* Valide o tipo de acesso dos usuários
+* Administradores criem e gerenciem usuários
+
+Permitir que usuários
+
+* Façam login
+* Faça, reset de senha
+* Sejam identificados como administradores ou membros para limitar suas ações
 
 ---
 
-# 🚀 Funcionalidades atuais
+## 🚀 Funcionalidades atuais
 
 Atualmente o sistema possui os seguintes recursos implementados:
 
@@ -55,7 +99,7 @@ Atualmente o sistema possui os seguintes recursos implementados:
 
 ---
 
-# 🏛️ Arquitetura do projeto
+## 🏛️ Arquitetura do projeto
 
 O projeto segue uma arquitetura em camadas:
 
@@ -90,7 +134,7 @@ Database
 
 ---
 
-# 🧱 Estrutura de módulos
+## 🧱 Estrutura de módulos
 
 O sistema é organizado em módulos baseados no domínio da aplicação.
 
@@ -126,36 +170,38 @@ Responsável por:
 
 ---
 
-# ⚙ Tecnologias utilizadas
+## ⚙️ Tecnologias utilizadas
 
-### Backend
+#### Backend
 
 * Node.js
 * Express
 
-### Banco de dados
+#### Banco de dados
 
 * MySQL
 
-### Query Builder
+#### Query Builder
 
 * Knex.js
 
-### Autenticação
+#### Autenticação
 
 * JSON Web Token (JWT)
 * bcrypt
 
-### Outras ferramentas
+#### Outras dependências
 
 * dotenv
 * nodemon
+* cors
+* cross-env
 
 ---
 
-# 🔌 Endpoints da API
+## 🔌 Endpoints da API
 
-## 🔒 Auth
+### 🔒 Auth
 
 Responsável por autenticação e criação de contas.
 
@@ -165,7 +211,7 @@ Responsável por autenticação e criação de contas.
 | POST   | /auth/login    | Login e geração de token JWT        |
 | POST   | /auth/reset    | Reset de senha do usuário           |
 
-### Exemplo de dados para registro
+#### Exemplo de body para registro
 
 ```json
 {
@@ -181,7 +227,7 @@ Responsável por autenticação e criação de contas.
 }
 ```
 
-### Exemplo de dados para login
+#### Exemplo de body para login
 
 ```json
 {
@@ -191,7 +237,7 @@ Responsável por autenticação e criação de contas.
 
 ```
 
-### Exemplo de dados para reset
+#### Exemplo de body para reset
 
 ```json
 {
@@ -205,7 +251,7 @@ Responsável por autenticação e criação de contas.
 
 ---
 
-## 👤 Users
+### 👤 Users
 
 Endpoints para gerenciamento de usuários.
 
@@ -225,7 +271,7 @@ Authorization: Bearer TOKEN
 | PATCH  | /users/id/activate   | Ativar usuário                            |
 | PATCH  | /users/id/deactivate | Desativar usuário                         |
 
-### Exemplo de dados para criação de usuário
+#### Exemplo de body para criação de usuário
 
 ```json
 {
@@ -237,27 +283,35 @@ Authorization: Bearer TOKEN
 
 ---
 
-# ▶ Como executar o projeto
+## ▶️ Como executar o projeto
 
-### 1️⃣ Clonar o repositório
+#### 1️⃣ Clonar o repositório
 
 ```
-git clone <repo>
+git clone https://github.com/anselmosz/users-auth-JWT-API
 ```
 
----
 
-### 2️⃣ Instalar dependências
+#### 2️⃣ Instalar dependências
 
 ```
 npm install
 ```
 
----
+#### 3️⃣ Criar o banco de dados
 
-### 3️⃣ Configurar variáveis de ambiente
+Para este projeto, em testes locais usei o xampp como SGBD, utilizando o script `db_local.sql`
 
-Crie um arquivo `.env` baseado no `.env.example`
+* Acessando o mysql via terminal, rode o seguinte comando:
+
+```
+source <path_to>/db_local.sql
+```
+
+
+#### 4️⃣ Configurar variáveis de ambiente
+
+Crie um arquivo `.env` baseado no `.env.example` configurando as variáveis do seu banco rodando localmente
 
 ```
 NODE_ENV=development
@@ -268,19 +322,16 @@ DB_CLIENT=mysql2
 DATABASE_URL=localhost
 DB_PORT=3306
 DB_NAME=database_name
-DB_USER=user
-DB_PASSWORD=password
+DB_USER=db_user
+DB_PASSWORD=db_password
 
 JWT_SECRET=seu_secret
 JWT_EXPIRES_IN=tempo_de_expiracao_do_jwt
 ```
 
----
 
-### 4️⃣ Executar o projeto
+#### 5️⃣ Executar o projeto
 
 ```
 npm run dev
 ```
-
----
