@@ -5,6 +5,6 @@ const router = Router();
 
 router.post("/register", authController.criarConta);
 router.post("/login", authController.login);
-router.post("/reset", authController.redefinirSenha);
+router.post("/password-reset", authController.redefinirSenha);
 
 export default router;
