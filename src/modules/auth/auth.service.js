@@ -75,7 +75,7 @@ export default {
         lockDate.setMinutes(lockDate.getMinutes() + 5);
         
         await usersRepository.bloquearAcessoPorUmTempo(usuario.user_id, usuario.account_id, lockDate);
-        throw new AppError("Usuário bloqueado por múltiplas tentativas inválidas.", 403);
+        throw new AppError("Usuário bloqueado por múltiplas tentativas inválidas.", 401);
       }
       
       throw new AppError("E-mail ou senha incorretos", 403);
