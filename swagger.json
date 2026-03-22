@@ -495,7 +495,7 @@
       },
       "PasswordReset": {
         "type": "object",
-        "required": ["email", "senha", "novaSenha", "confirmarSenha"],
+        "required": ["email", "senha", "senhaNova", "confirmarSenha"],
         "properties": {
           "email": {
             "type": "string",
