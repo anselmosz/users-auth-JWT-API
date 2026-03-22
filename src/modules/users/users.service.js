@@ -5,12 +5,12 @@ import { randomGenerate } from "../../utils/randomGenerate.js";
 
 export default {
   criarUsuario: async (data, accountId) => {    
-    if (Object.keys(data).length === 0) throw new AppError("O body não pode estar vazio!", 400);
+    if (Object.keys(data).length === 0) throw new AppError("Dados obrigatórios faltando", 400);
     
     const validarEmail = await usersRepository.buscarEmailDoUsuario(data.email);
     if (validarEmail) throw new AppError("Já existe usuário com este email", 400);
 
-    if (!data.name || !data.email || !data.role) throw new AppError("Campos obrigatórios para criar usuário pendentes", 400);
+    if (!data.name || !data.email || !data.role) throw new AppError("Dados obrigatórios faltando", 400);
     
     const senhaTemporaria = randomGenerate(8);
 
@@ -45,7 +45,7 @@ export default {
   },
 
   atualizarDadosDoUsuario: async (data, userId, accountId) => {
-    if (Object.keys(data).length === 0) throw new AppError("O body não pode estar vazio!", 400);
+    if (Object.keys(data).length === 0) throw new AppError("Dados obrigatórios faltando!", 400);
     
     if (!data.role && !data.name && !data.email) throw new AppError("Atualize pelo menos um dado do usuario!", 400);
 

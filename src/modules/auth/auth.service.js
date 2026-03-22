@@ -8,7 +8,7 @@ export default {
   criarConta: async(companyData, userData) => {
     const validarEmail = await usersRepository.buscarEmailDoUsuario(userData.email);
     
-    if (validarEmail) throw new AppError("Já existe usuário com este email", 400);
+    if (validarEmail) throw new AppError("Já existe usuário com este email", 401);
     
     const company_payload = {
       name: companyData.name,
@@ -48,10 +48,10 @@ export default {
   },
 
   login: async(data) => {
-    if (!data.email || !data.senha) throw new AppError("Informe email e senha para realizar login", 400);
+    if (!data.email || !data.senha) throw new AppError("Dados obrigatórios faltando", 400);
     
     const usuario = await usersRepository.validarCredenciais(data.email);
-    if (!usuario) throw new AppError("E-mail ou senha incorretos", 403);
+    if (!usuario) throw new AppError("E-mail ou senha incorretos", 401);
     
     if (usuario.must_change_password === 1) throw new AppError("Senha temporária. Necessário redefinir senha", 403);
 
@@ -60,6 +60,7 @@ export default {
     }
     
     const senhaValida = await bcrypt.compare(data.senha, usuario.password_hash);
+    if (!senhaValida) throw new AppError("E-mail ou senha incorretos", 401);
 
     if (usuario.user_status == "inactive") throw new AppError("Usuário inativo", 403);
 
@@ -78,7 +79,7 @@ export default {
         throw new AppError("Usuário bloqueado por múltiplas tentativas inválidas.", 401);
       }
       
-      throw new AppError("E-mail ou senha incorretos", 403);
+      throw new AppError("E-mail ou senha incorretos", 401);
     }
 
     await usersRepository.resetarTentativasDeLogin(usuario.user_id, usuario.account_id);
@@ -103,16 +104,16 @@ export default {
   },
 
   redefinirSenha: async (data) => {
-    if (!data.email || !data.senha || !data.senhaNova || !data.confirmarSenha) throw new AppError("Dados obrigatórios não informados", 403);
-
-    if (!data.email && !data.senha) throw new AppError("Informe email e senha para realizar o reset", 401);
+    if (!data.email || !data.senha || !data.senhaNova || !data.confirmarSenha) throw new AppError("Dados obrigatórios não informados", 400);
     
     const usuario = await usersRepository.validarCredenciais(data.email);
-    if (!usuario) throw new AppError("E-mail ou senha incorretos", 403);
+    if (!usuario) throw new AppError("E-mail ou senha incorretos", 401);
+    
+    const senhaValida = bcrypt.compare(data.senha, usuario.password_hash);
 
-    if (data.senha !== usuario.password_hash) throw new AppError("E-mail ou senha incorretos", 403);
+    if (data.senha !== usuario.password_hash || !senhaValida) throw new AppError("E-mail ou senha incorretos", 401);
 
-    if (data.senhaNova !== data.confirmarSenha) throw new AppError("As senhas devem ser iguais", 401);
+    if (data.senhaNova !== data.confirmarSenha) throw new AppError("As senhas devem ser iguais", 400);
 
     const SALT_ROUNDS = 10;
 

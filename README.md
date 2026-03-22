@@ -49,11 +49,11 @@ A API está disponível em produção:
 
 🔗 API: https://users-auth-jwt-api.onrender.com
 
-<!-- 
-    ### Documentação (Swagger)
 
-    🔗 Docs (Swagger): [Link da docuemntação]()
- -->
+### Documentação (Swagger)
+
+🔗 Docs (Swagger): [Link da docuemntação](https://users-auth-jwt-api.onrender.com/api-docs)
+
 
 ---
 
@@ -265,9 +265,9 @@ Authorization: Bearer TOKEN
 
 | Método | Endpoint             | Descrição                                 |
 | ------ | -------------------- | ----------------------------------------- |
+| POST   | /users               | Criar novo usuário com senha aleatória    |
 | GET    | /users               | Listar usuários                           |
 | GET    | /users/id            | Buscar usuário por ID                     |
-| POST   | /users               | Criar novo usuário com senha aleatória    |
 | PUT    | /users/id            | Atualizar usuário                         |
 | DELETE | /users/id            | Remover usuário                           |
 | PATCH  | /users/id/activate   | Ativar usuário                            |
