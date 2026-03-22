@@ -140,7 +140,7 @@
                   "value": {
                     "email": "admin@xpto.com.br",
                     "senha": "Senha@1234",
-                    "novaSenha": "1234@Senha",
+                    "senhaNova": "1234@Senha",
                     "confirmarSenha": "1234@Senha"
                   }
                 }
