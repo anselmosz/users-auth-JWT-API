@@ -10,20 +10,13 @@ dotenv.config({
 export const env = process.env.NODE_ENV;
 
 export const dbConfig = {
-  client: process.env.DB_CLIENT || "mysql2",
+  client: process.env.DB_CLIENT,
   connection: {
     host: process.env.DATABASE_URL,
     port: process.env.DB_PORT,
     name: process.env.DB_NAME,
     user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    ssl: {
-      rejectUnauthorized: false
-    },
-  },
-  pool: {
-    min: 2,
-    max: 10
+    password: process.env.DB_PASSWORD
   }
 }
 
