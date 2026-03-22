@@ -1,0 +1,550 @@
+{
+  "type": "json",
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Documentação da API de autenticação e gerenciamento de usuários baseada em JWT, desenvolvida com foco em boas práticas de backend, arquitetura em camadas e isolamento de dados por conta. Você pode conferir mais detalhes sobre o projeto no [repositório do GitHub](https://github.com/anselmosz/users-auth-JWT-API)",
+    "version": "1.0.0",
+    "title": "Users Auth JWT API",
+    "contact": { "email": "anselmoma2005@outlook.com" }
+  },
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Operações relacionadas a login, redefinição de senha e criação de conta"
+    },
+    {
+      "name": "users",
+      "description": "Operações relacionadas a perfis de usuários"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://users-auth-jwt-api.onrender.com",
+      "description": "API em produção"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Criação da conta",
+        "description": "Rota responsável por criar uma nova conta + conta de um usuário admin",
+        "tags": ["auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              },
+              "examples": {
+                "register": {
+                  "value": {
+                    "company": {
+                      "name": "Empresa Xpto LTDA",
+                      "plan": "free"
+                    },
+                    "user": {
+                      "name": "Administrador",
+                      "email": "admin@xpto.com.br",
+                      "senha": "Senha@1234"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Register"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Criação de token JWT através de login com email e senha",
+        "description": "Rota responsável por criar um token JWT com credenciais do usuário (email e senha)",
+        "tags": ["auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              },
+              "examples": {
+                "login": {
+                  "value": {
+                    "email": "admin@xpto.com.br",
+                    "senha": "Senha@1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/Login"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/password-reset": {
+      "post": {
+        "summary": "Redefinição de senha do usuário",
+        "description": "Rota para redefinição de senha do usuário",
+        "tags": ["auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordReset"
+              },
+              "examples": {
+                "reset": {
+                  "value": {
+                    "email": "admin@xpto.com.br",
+                    "senha": "Senha@1234",
+                    "novaSenha": "1234@Senha",
+                    "confirmarSenha": "1234@Senha"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Criação de perfil de usuário",
+        "description": "Rota para criação de um perfil de um novo usuário",
+        "tags": ["users"],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Usuário",
+                    "email": "user@xpto.com.br",
+                    "role": "member"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar todos os usuários da conta",
+        "description": "Rota para listagem de todos os usuários da conta",
+        "tags": ["users"],
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "summary": "Buscar um usuário por ID",
+        "description": "Rota para busca de um usuário da conta através do ID",
+        "tags": ["users"],
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do usuário que será buscado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Editar dados do usuário",
+        "description": "Rota para editar os dados do usuário",
+        "tags": ["users"],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Usuário",
+                    "email": "user@xpto.com.br",
+                    "role": "admin"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do usuário que será editado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir um usuário",
+        "description": "Rota para excluir um usuário da conta",
+        "tags": ["users"],
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do usuário que será excluído",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "204": {
+            "description": "No content"
+          }
+        }
+      }
+    },
+    "users/{id}/activate": {
+      "patch": {
+        "summary": "Ativar um usuário",
+        "description": "Rota para ativar o perfil de um usuário",
+        "tags": ["users"],
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do usuário que será ativado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    },
+    "users/{id}/deactivate": {
+      "patch": {
+        "summary": "Desativar um usuário",
+        "description": "Rota para desativar o perfil de um usuário",
+        "tags": ["users"],
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID do usuário que será desativado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Register": {
+        "type": "object",
+        "required": ["name", "plan"],
+        "properties": {
+          "company": {
+            "type": "object",
+            "required": ["name", "plan"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Nome da empresa"
+              },
+              "plan": {
+                "type": "string",
+                "enum": ["free", "pro", "enterprise"],
+                "description": "Plano escolhido"
+              }
+            }
+          },
+          "user": {
+            "type": "object",
+            "required": ["name", "email", "senha"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Nome do usuário"
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "E-mail do usuário"
+              },
+              "senha": {
+                "type": "string",
+                "format": "password",
+                "minLength": 8,
+                "description": "Senha do usuário"
+              }
+            }
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "required": ["email", "senha"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "E-mail do usuário"
+          },
+          "senha": {
+            "type": "string",
+            "format": "password",
+            "description": "Senha do usuário"
+          }
+        }
+      },
+      "PasswordReset": {
+        "type": "object",
+        "required": ["email", "senha", "novaSenha", "confirmarSenha"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "E-mail do usuário"
+          },
+          "senha": {
+            "type": "string",
+            "format": "password",
+            "description": "Senha atual do usuário"
+          },
+          "senhaNova": {
+            "type": "string",
+            "format": "password",
+            "description": "A nova senha do usuário"
+          },
+          "confirmarSenha": {
+            "type": "string",
+            "format": "password",
+            "description": "confirmação da nova senha do usuário"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": ["name", "email", "role"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome do usuário"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "E-mail do usuário"
+          },
+          "role": {
+            "type": "string",
+            "description": "Tipo de acesso do usuário"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
