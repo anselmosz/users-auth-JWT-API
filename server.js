@@ -4,7 +4,7 @@ import "./src/config/env.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocsJson from "./swagger.json" with {type: "json"};
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocsJson));
 
