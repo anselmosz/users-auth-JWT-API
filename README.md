@@ -15,7 +15,7 @@
 ## 📚 Table of Contents
 
 - [📌 Sobre o projeto](#-sobre-o-projeto)
-- [🌐 Deploy](#-deplpoy)
+- [🌐 Deploy](#-deploy)
 - [🎯 Objetivo](#-objetivo-do-sistema)
 - [🚀 Funcionalidades](#-funcionalidades-atuais)
 - [🏛️ Arquitetura](#️-arquitetura-do-projeto)
